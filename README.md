@@ -11,12 +11,14 @@ yarn add load-es
 
 ## Usage
 
-entry.js file
+```shell
+node --require load-es <your file path>
+```
 
-```javascript
-require("load-es")
-require("./main.js")
-// or  require("./main.ts")
+example
+
+```shell
+node --require load-es main.js
 ```
 main.js
 ```javascript

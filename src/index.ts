@@ -26,7 +26,7 @@ function resolveFilename(filename: string, parent): string {
 
 OriginModule._extensions['.ts'] = function (module, filename) {
     const context = fs.readFileSync(filename, 'utf-8');
-    module._compile(transformSync(context, { format: 'cjs', sourcemap: "inline"  }).code, filename);
+    module._compile(transformSync(context, { format: 'cjs', sourcemap: "inline", loader: 'ts'  }).code, filename);
 }
 
 OriginModule._load = (request: string, parent, isMain) => {
@@ -50,7 +50,7 @@ OriginModule._load = (request: string, parent, isMain) => {
             return {};
         } else if (/\.ts$/.test(request)) {
             const filename = resolveFilename(request, parent);
-            const code = transformSync(fs.readFileSync(filename).toString(), { format: 'cjs', sourcemap: "inline"  }).code;
+            const code = transformSync(fs.readFileSync(filename).toString(), { format: 'cjs', sourcemap: "inline", loader: 'ts'  }).code;
             //@ts-ignore
             const m: any = new Module();
             m.id = filename;
